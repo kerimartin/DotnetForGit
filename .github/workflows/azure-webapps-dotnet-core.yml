@@ -111,7 +111,15 @@ jobs:
           dest: 'azureuser@23.102.124.231:/var/www/html'
 
       - name: Display status from deploy
-        run: |
-          sudo systemctl restart dotnetapp.service
-          echo "${{ steps.deploy.outputs.status }}"
+        run:
+           echo "${{ steps.deploy.outputs.status }}"
+         
+      - name: Restart service
+        uses: D3rHase/ssh-command-action@{version}
+        with:
+            HOST: azureuser@23.102.124.231                             # Remote server address / ip - Required: true
+            PORT: 22                             # Remote server port -  Default: 22 - Required: false
+            USER: azureuser                             # Remote server user - Required: true
+            PRIVATE_SSH_KEY: ${{secrets.DEPLOY_KEY}}       # Private ssh key registered on the remote server - Required: true
+            COMMAND: 'sudo systemctl restart dotnetapp.service'     
           
