@@ -102,7 +102,7 @@ jobs:
           flags: '-avzr --delete --rsync-path="sudo rsync"'
           options: ''
           ssh_options: ''
-          src:  '.net-app'
+          src:  ${{env.DOTNET_ROOT}}/myapp
           dest: 'azureuser@23.102.124.231:/var/www/html'
 
       - name: Display status from deploy
