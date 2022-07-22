@@ -117,7 +117,7 @@ jobs:
       - name: Restart service
         uses: appleboy/ssh-action@master
         with:
-            host: azureuser@23.102.124.231
+            host: 23.102.124.231
             username: azureuser
             key: ${{ secrets.DEPLOY_KEY }}
             port: 22
