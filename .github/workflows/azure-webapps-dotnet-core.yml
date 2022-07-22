@@ -115,7 +115,7 @@ jobs:
            echo "${{ steps.deploy.outputs.status }}"
          
       - name: Restart service
-        uses: D3rHase/ssh-command-action@{version}
+        uses: D3rHase/ssh-command-action@0.2.1
         with:
             HOST: azureuser@23.102.124.231                             # Remote server address / ip - Required: true
             PORT: 22                             # Remote server port -  Default: 22 - Required: false
