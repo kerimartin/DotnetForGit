@@ -78,8 +78,7 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
         with:
-          path: public
-          name: net-app
+          name: .net-app
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -94,6 +93,7 @@ jobs:
     needs: build
     steps:
       - run: | 
+          cd ../
           ls -a
       - name: Deploy to server
         id: deploy
@@ -105,7 +105,7 @@ jobs:
           flags: '-avzr --delete --rsync-path="sudo rsync"'
           options: ''
           ssh_options: ''
-          src: 'public'
+          src: '.net-app'
           dest: 'azureuser@23.102.124.231:/var/www/html'
 
       - name: Display status from deploy
