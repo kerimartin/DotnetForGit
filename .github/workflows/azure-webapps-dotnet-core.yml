@@ -89,17 +89,20 @@ jobs:
           package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
           
   deployvm:
-    - name: Deploy to server
-      id: deploy
-      uses: Pendect/action-rsyncer@v1.1.0
-      env:
-         DEPLOY_KEY: ${{secrets.DEPLOY_KEY}}
-      with:
-        flags: '-avzr --delete'
-        options: ''
-        ssh_options: ''
-        src: 'public/'
-        dest: 'user@server.com:/var/www/server.com'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to server
+        id: deploy
+        uses: Pendect/action-rsyncer@v1.1.0
 
-    - name: Display status from deploy
-      run: echo "${{ steps.deploy.outputs.status }}"
+        env:
+          DEPLOY_KEY: ${{secrets.DEPLOY_KEY}}
+        with:
+          flags: '-avzr --delete'
+          options: ''
+          ssh_options: ''
+          src:  ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+          dest: 'azureuser@23.102.124.231:/var/www/html'
+
+      - name: Display status from deploy
+        run: echo "${{ steps.deploy.outputs.status }}"
