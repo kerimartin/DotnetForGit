@@ -115,11 +115,10 @@ jobs:
            echo "${{ steps.deploy.outputs.status }}"
          
       - name: Restart service
-        uses: D3rHase/ssh-command-action@0.2.1
+        uses: appleboy/ssh-action@master
         with:
-            HOST: azureuser@23.102.124.231                             # Remote server address / ip - Required: true
-            PORT: 22                             # Remote server port -  Default: 22 - Required: false
-            USER: azureuser                             # Remote server user - Required: true
-            PRIVATE_SSH_KEY: ${{secrets.DEPLOY_KEY}}       # Private ssh key registered on the remote server - Required: true
-            COMMAND: 'sudo systemctl restart dotnetapp.service'     
-          
+            host: azureuser@23.102.124.231
+            username: azureuser
+            key: ${{ secrets.DEPLOY_KEY }}
+            port: 22
+            script: sudo systemctl restart dotnetapp.service
