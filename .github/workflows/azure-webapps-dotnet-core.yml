@@ -99,7 +99,7 @@ jobs:
         env:
           DEPLOY_KEY: ${{secrets.DEPLOY_KEY}}
         with:
-          flags: '-avzr --delete'
+          flags: '-avzr --delete --rsync-path="sudo rsync"'
           options: ''
           ssh_options: ''
           src:  ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
