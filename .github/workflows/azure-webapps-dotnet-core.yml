@@ -111,4 +111,7 @@ jobs:
           dest: 'azureuser@23.102.124.231:/var/www/html'
 
       - name: Display status from deploy
-        run: echo "${{ steps.deploy.outputs.status }}"
+        run: |
+          sudo systemctl restart dotnetapp.service
+          echo "${{ steps.deploy.outputs.status }}"
+          
