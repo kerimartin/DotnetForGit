@@ -111,4 +111,14 @@ jobs:
           dest: 'azureuser@23.102.124.231:/var/www/html'
 
       - name: Display status from deploy
-        run: echo "${{ steps.deploy.outputs.status }}"
+        run:
+           echo "${{ steps.deploy.outputs.status }}"
+         
+      - name: Restart service
+        uses: appleboy/ssh-action@master
+        with:
+            host: 23.102.124.231
+            username: azureuser
+            key: ${{ secrets.DEPLOY_KEY }}
+            port: 22
+            script: sudo systemctl restart dotnetapp.service
