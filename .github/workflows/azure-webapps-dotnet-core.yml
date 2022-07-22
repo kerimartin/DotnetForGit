@@ -93,7 +93,7 @@ jobs:
     needs: build
     steps:
       - run: | 
-          cd ../
+          cd /home/github/
           ls -a
       - name: Deploy to server
         id: deploy
@@ -105,7 +105,7 @@ jobs:
           flags: '-avzr --delete --rsync-path="sudo rsync"'
           options: ''
           ssh_options: ''
-          src: '.net-app'
+          src: '~/.nuget/packages'
           dest: 'azureuser@23.102.124.231:/var/www/html'
 
       - name: Display status from deploy
