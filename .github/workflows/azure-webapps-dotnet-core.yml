@@ -92,6 +92,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v3
+        with:
+          name: .net-app
+    
       - name: Deploy to server
         id: deploy
         uses: Pendect/action-rsyncer@v1.1.0
@@ -102,7 +107,7 @@ jobs:
           flags: '-avzr --delete --rsync-path="sudo rsync"'
           options: ''
           ssh_options: ''
-          src: ''
+          src: '/*'
           dest: 'azureuser@23.102.124.231:/var/www/html'
 
       - name: Display status from deploy
