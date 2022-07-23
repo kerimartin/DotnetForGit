@@ -108,7 +108,7 @@ jobs:
           options: ''
           ssh_options: ''
           src: '/'
-          dest: 'azureuser@23.102.124.231:/var/www/html'
+          dest: 'azureuser@20.230.102.48:/var/www/html'
 
       - name: Display status from deploy
         run:
@@ -117,7 +117,7 @@ jobs:
       - name: Restart service
         uses: appleboy/ssh-action@master
         with:
-            host: 23.102.124.231
+            host: 20.230.102.48
             username: azureuser
             key: ${{ secrets.DEPLOY_KEY }}
             port: 22
